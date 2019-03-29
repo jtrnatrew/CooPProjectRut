@@ -1,0 +1,84 @@
+<html>
+    <head>
+        <title>TISCO</title>
+        <link rel="icon" href="{{ url_for('static', filename='Logo_TISCO.jpg') }}">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+
+        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='scriptFile.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/jquery-3.3.1.js') }}"></script>
+        <script>
+            function disbtn(){
+                document.getElementById("btn1").disabled = false;
+            }
+        </script>
+
+    </head>
+    <body class="container bg-primary" onload="resultX()" ondragstart="return false">
+        <!--- RESULT PART -->
+        <div class="container p-3 border border-dark shadow-lg p-3 mt-3 col-lg-12 text-center center-block bg-white rounded">
+            <div class="text-center row">
+                <div class="col-lg-2">
+                    <button class="btn btn-dark btn-lg" onclick="window.location.href = 'http://ขอลบ/'">BACK</button>
+                </div>
+                <div class="col-lg-8">
+                    <h1 class="text-center">RESULT</h1>
+                    <h2 class="text-center text-danger">{{mdname}}</h2>
+                    <h3 class="text-center">{{massage}}</h3>
+                </div>
+                <div class="col-lg-2">
+                    <img width="100px" height="100px" src="{{ url_for('static', filename='CSV-icon-new.png') }}">
+                </div>
+            </div>
+            <div class="pt-5" id="output" class="col-lg-12 text-center center-block">
+                <table align="center" class="border border-dark border-lg text-center table table-striped col-lg-10" id="tableX"></table>
+            </div>
+        </div>
+        <div class="mt-3 text-center">
+            <h6 class="text-center text-muted text-dark" onclick="window.open('http://ขอลบ/Log', '', 'width=600,height=800')"><small>version 2.0</small></h6>
+            <h6 class="text-center text-muted text-dark" onclick="window.open('http://ขอลบ/Log', '', 'width=600,height=800')"><small>รายละเอียด</small></h6>
+        </div>
+        
+    </body>
+    <script>
+        function resultX(){////////////////////////////////////////ปริ้นข้อมูลการทำนาย///////////////////////////////////
+            var ac = {{ account|safe }}; ///ไม่ใช้แล้ว account=account, nn=NN_ans, dt=DT_ans, nb=NB_ans, fn=FN_ans
+            var nn = {{ nn|safe }};
+            var dt = {{ dt|safe }};
+            var nb = {{ nb|safe }};
+            var fn = {{ fn|safe }};
+            headtable();
+            for(var j=0; j<ac.length; j++){
+                var rowAns = document.createElement("tr");
+                    rowAns.setAttribute("class","table-hover table-striped");
+                var xsc = [j+1, ac[j], nn[j], dt[j], nb[j], fn[j].toFixed(2)];
+                //var xsc = [x[j], k[j], b[j]];
+                for(var i=0; i<xsc.length; i++){
+                    var cell2 = document.createElement("td");
+                        cell2.setAttribute("class","border border-info border-lg text-dark text-sm table-secondary");
+                    var celltext2 = document.createTextNode(xsc[i]);
+                    cell2.appendChild(celltext2);
+                    rowAns.appendChild(cell2);
+                }
+                document.getElementById("tableX").appendChild(rowAns);
+            }
+        }
+        function headtable(){
+            var rowAns = document.createElement("tr");
+                rowAns.setAttribute("class","table-hover table-striped");
+
+            var xsc = ["NO.", "ACCOUNT",	"NEURAL NETWORK", "DECISION TREE", "NAIVE BAYES", "%"];
+                for(var i=0; i<xsc.length; i++){
+                    var cell2 = document.createElement("th");
+                        cell2.setAttribute("class","border border-info border-lg text-white text-sm bg-dark");
+                    var celltext2 = document.createTextNode(xsc[i]);
+                    cell2.appendChild(celltext2);
+                    rowAns.appendChild(cell2);
+                }
+                document.getElementById("tableX").appendChild(rowAns);
+        }/////////////////////////////////*******************///////////////////////////////////////////////
+    </script>
+</html>
+

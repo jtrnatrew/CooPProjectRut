@@ -1,0 +1,174 @@
+<html>
+    <head>
+        <title>TISCO</title>
+        <link rel="icon" href="{{ url_for('static', filename='Logo_TISCO.jpg') }}">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+
+        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='scriptFile.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/jquery-3.3.1.js') }}"></script>
+        <script>
+            function disbtn(){
+                document.getElementById("btn1").disabled = false;
+            }
+        </script>
+
+    </head>
+    <body class="container bg-primary" ondragstart="return false">
+        <!-- INPUT PART -->
+        <div class="container text-center border border-dark p-3 shadow-lg  mt-3 col-lg-12 row bg-white rounded">     <!--  -->
+            <div class="col-lg-12 row">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-10">
+                    <!-- FILE INPUT -->
+                    <form action = "http://ขอลบ/uploaderzwei" method = "POST" enctype = "multipart/form-data">
+                        <h1 class="mb-3">FILE INPUT</h1>
+                        <input class="border border-primary" type = "file" name = "file" onchange="disbtn()"/><br>
+                        <div class="row mt-2 col-lg-12 mt-5">
+                            <span class="col-lg-3"></span>
+                            <h3 class="btn btn-primary col-lg-2 rounded-0">เลือกโมเดล</h3>
+                            <select class="form-control col-lg-4 border border-primary rounded-0" name="actionCode">
+                                <option value="1">NEURAL NETWORK</option>
+                                <option value="2">DECISION TREE</option>
+                                <option value="3">NAIVE BAYES</option>
+                                <option value="4">COMPARE 3 MODEL</option>
+                            </select>
+                            <span class="col-lg-3"></span>
+                        </div>
+                        <input type = "submit" class="btn btn-danger bg-lg mt-3" disabled="disabled" id="btn1"/>
+                    </form>
+                    <!-- END FILE INPUT ('จังหวัด อายุลูกค้า อายุรถยนต์ ประเภทรถยนต์ รถใหม่หรือรถใช้แล้ว รอบที่ต่อประกันรถยนต์ ประเภทประกันที่ต่อรถยนต์ ค่าเบี้ยจ่ายประกันรถยนต์ บริษัทประกันรถยนต์ การจัดซ่อม ประเภทการชำระ วิธีการชำระ')-->
+                </div>
+                <div class="col-lg-1"></div>
+            </div>
+            <div class="col-lg-12 mt-3" align="center">
+                <div class="col-lg-8 bg-light">
+                    <h3 class="text-danger">ข้อควรระวังก่อนใช้งาน</h3>
+                    <h5 class="text-dark">กรุณาเตรียมไฟล์ข้อมูลดังนี้</h5>
+                    <ul>
+                        <li class="text-left"><h6>ข้อมูลที่จำเป็น: <span onclick="window.open('http://ขอลบ/Warning', '', 'width=1000,height=800')">click</span></h6></li>
+                        <li class="text-left">การเตรียมข้อมูล: <span onclick="window.open('http://ขอลบ/Preprocess', '', 'width=1000,height=800')">click</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ------------------------------------MANUAL INPUT----------------------------------- -->
+        <div class="container text-center border border-dark p-3 shadow-lg  mt-2 col-lg-12 row bg-white rounded">
+            <div class="row col-lg-12">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-8">
+                    <h1>MANUAL INPUT</h1>
+                </div>
+                <div class="col-lg-2"></div>
+            </div>
+            <div class="col-lg-12 center-block" align="center">
+                <form class="form-group" action = "http://10.242.12.123:8080/upload_manual" method = "POST" enctype = "multipart/form-data">
+                    <input class="border border-primary" type="text" name="hpno" id="hpno" placeholder="ACCOUNT">
+                    <div class="row col-lg-12 text-left"> <!-- อินพุต 3 ตัวแรก แถวแรก -->
+                        <div class="row col-lg-4 m-0">
+                            <h6 class="mr-1 col-lg-10 text-danger">อายุคน:</h6>
+                            <select id="AGE" name="AGE" class="form-control col-lg-10 border border-primary">
+                                <!--ลบข้อมูลออก เพราะเป็นข้อมูลของบริษัท-->
+                            </select>
+                        </div>
+                        <div class="row col-lg-4 m-0">
+                            <h6 class="mr-1 col-lg-10 text-danger">ภูมิภาค:</h6>
+                            <select id="REGION" name="REGION" class="form-control col-lg-10 border border-primary">
+                                <!--ลบข้อมูลออก เพราะเป็นข้อมูลของบริษัท-->
+                            </select>
+                        </div>
+                        <div class="row col-lg-4  m-0">
+                            <h6 class="mr-1 col-lg-10 text-danger">รถใหม่:</h6>
+                            <select id="NEW_USED_" name="NEW_USED_" class="form-control col-lg-10 border border-primary">
+                                <!--ลบข้อมูลออก เพราะเป็นข้อมูลของบริษัท-->
+                            </select>
+                        </div>
+                    </div>
+                    <!-------------------------------- จบแถวแรก --------------------------------------->
+
+
+                    <div class="row col-lg-12 text-left mt-2"> <!-- อินพุต 3 ตัวต่อมา แถวสอง -->
+                        <div class="row col-lg-4 m-0">
+                            <h6 class="mr-1 col-lg-10 text-danger">อายุรถ:</h6>
+                            <select id="YEAR_OF_PRODUCT" name="YEAR_OF_PRODUCT" class="form-control col-lg-10 border border-primary">
+                                <!--ลบข้อมูลออก เพราะเป็นข้อมูลของบริษัท-->
+                            </select>
+                        </div>
+                        <div class="row col-lg-4 m-0">
+                            <h6 class="mr-1 col-lg-10 text-danger">ประเภทรถ:</h6>
+                            <select id="TYPE_PRODUCT" name="TYPE_PRODUCT" class="form-control col-lg-10 border border-primary">
+                                <!--ลบข้อมูลออก เพราะเป็นข้อมูลของบริษัท-->
+                            </select>
+                        </div>
+                        <div class="row col-lg-4  m-0">
+                            <h6 class="mr-1 col-lg-10 text-danger">รอบที่ต่อประกันรถยนต์:</h6>
+                            <select id="COM_ROUND" name="COM_ROUND" class="form-control col-lg-10 border border-primary">
+                                <!--ลบข้อมูลออก เพราะเป็นข้อมูลของบริษัท-->
+                            </select>
+                        </div>
+                    </div>
+                    <!--------------------------------- จบแถว2 --------------------------------------------->
+
+                    <div class="row col-lg-12 text-left mt-2"> <!-- อินพุต 3 ตัวต่อมา แถวสาม -->
+                        <div class="row col-lg-4 m-0">
+                            <h6 class="mr-1 col-lg-10">ประเภทประกันที่ต่อรถยนต์:</h6>
+                            <select id="T25_COM_TYPE_COVERAGE" name="T25_COM_TYPE_COVERAGE" class="form-control col-lg-10 border border-primary">
+                                <!--ลบข้อมูลออก เพราะเป็นข้อมูลของบริษัท-->
+                            </select>
+                        </div>
+                        <div class="row col-lg-4 m-0">
+                            <h6 class="mr-1 col-lg-10 text-danger">ค่าเบี้ยจ่ายประกันรถยนต์:</h6>
+                            <select id="COM_CONFIRM" name="COM_CONFIRM" class="form-control col-lg-10 border border-primary">
+                                <!--ลบข้อมูลออก เพราะเป็นข้อมูลของบริษัท-->
+                            </select>
+                        </div>
+                        <div class="row col-lg-4  m-0">
+                            <h6 class="mr-1 col-lg-10 text-danger">บริษัทประกันรถยนต์:</h6>
+                            <select id="T25_COM_INS_CODE" name="T25_COM_INS_CODE" class="form-control col-lg-10 border border-primary">
+                                <!--ลบข้อมูลออก เพราะเป็นข้อมูลของบริษัท-->
+                            </select>
+                        </div>
+                    </div>
+                    <!--------------------------------- จบแถว3 --------------------------------------------->
+                    
+                    
+                    <div class="row col-lg-12 text-left mt-2"> <!-- อินพุต 3 ตัวต่อมา แถวสี่ -->
+                        <div class="row col-lg-4 m-0">
+                            <h6 class="mr-1 col-lg-10 text-danger">การจัดซ่อม:</h6>
+                            <select id="CLAIM_CON" name="CLAIM_CON" class="form-control col-lg-10 border border-primary">
+                                <!--ลบข้อมูลออก เพราะเป็นข้อมูลของบริษัท-->
+                            </select>
+                        </div>
+                        <div class="row col-lg-4 m-0">
+                            <h6 class="mr-1 col-lg-10 text-danger">ประเภทการชำระ:</h6>
+                            <select id="INS_PAY_TYPE" name="INS_PAY_TYPE" class="form-control col-lg-10 border border-primary">
+                                <!--ลบข้อมูลออก เพราะเป็นข้อมูลของบริษัท-->
+                            </select>
+                        </div>
+                        <div class="row col-lg-4  m-0">
+                            <h6 class="mr-1 col-lg-10 text-danger">วิธีการชำระ:</h6>
+                            <select id="INS_PAY_BY" name="INS_PAY_BY" class="form-control col-lg-10 border border-primary">
+                                <!--ลบข้อมูลออก เพราะเป็นข้อมูลของบริษัท-->
+                            </select>
+                        </div>
+                    </div>
+                    <!-- จบแถว4 -->
+                    <div align="center">
+                        <button class="btn btn-danger btn-lg mt-3" type="submit" value = "submit">OK</button>
+                    </div>
+
+
+
+                </form>
+            </div>
+        </div>
+        <!---->
+        <div class="mt-3 text-center">
+            <h6 class="text-center text-muted text-dark" onclick="window.open('http://ขอลบ/Log', '', 'width=600,height=800')"><small>version 2.0</small></h6>
+            <h6 class="text-center text-muted text-dark" onclick="window.open('http://ขอลบ/Log', '', 'width=600,height=800')"><small>รายละเอียด</small></h6>
+        </div>
+    </body>
+</html>
